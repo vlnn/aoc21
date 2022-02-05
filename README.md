@@ -4,7 +4,7 @@ Solutions for advent of code 2021 in Clojure
 
 ## Advent of code
 
-This is annual "self-competition". See more at https://adventofcode.com/2021
+This is annual "self-competition". See more at https://adventofcode.com/2021/about
 
 ## Implementation
 
