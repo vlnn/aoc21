@@ -2,6 +2,6 @@
   (:gen-class))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Day 1: Sonar Sweep"
   [& args]
   (println "Hello, World!"))
