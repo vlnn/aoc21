@@ -7,9 +7,27 @@
 
 (defn gamma-rate
   [data]
-  ({false 0, true 1} (< (second (apply map vector (vec (frequencies (first data))))))))
+  (key (first
+        (sort-by val > (frequencies  data)))))
+
+(defn epsilon-rate
+  [data]
+  (key (first
+        (sort-by val < (frequencies  data)))))
+
+(defn count-whole-rate
+  [data f]
+  (Integer/parseInt (str/join (map f data)) 2))
+
+(def gamma
+  (count-whole-rate diagnostic-data gamma-rate))
+
+(def epsilon
+  (count-whole-rate diagnostic-data epsilon-rate))
 
 (defn -main
   "Day 3: Binary Diagnostic"
   [& args]
-  (println "Hello, World!"))
+  (println "gamma rate: " gamma)
+  (println "epsilon rate: " epsilon)
+  (println "power: " (* gamma epsilon)))
