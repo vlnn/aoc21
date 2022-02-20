@@ -1,33 +1,18 @@
 (ns aoc21.core
-  (:require [clojure.string :as str])
+  (:require [clojure.string :as str]
+            [clojure.core.matrix :as matrix])
   (:gen-class))
 
-(def diagnostic-data
-  (apply map vector (map char-array (str/split-lines (slurp "resources/input.txt")))))
+(def bingo-input
+  (map #(Integer/parseInt %) (str/split  (first (str/split-lines (slurp "resources/input.txt"))) #",")))
 
-(defn gamma-rate
-  [data]
-  (key (first
-        (sort-by val > (frequencies  data)))))
+(def bingo-boards-raw
+  (map #(Integer/parseInt %) (filter not-empty (str/split (str/join #" "  (rest (str/split-lines (slurp "resources/input.txt")))) #" "))))
 
-(defn epsilon-rate
-  [data]
-  (key (first
-        (sort-by val < (frequencies  data)))))
-
-(defn count-whole-rate
-  [data f]
-  (Integer/parseInt (str/join (map f data)) 2))
-
-(def gamma
-  (count-whole-rate diagnostic-data gamma-rate))
-
-(def epsilon
-  (count-whole-rate diagnostic-data epsilon-rate))
+(def bingo-boards
+  (matrix/reshape bingo-boards-raw [100 5 5]))
 
 (defn -main
-  "Day 3: Binary Diagnostic"
-  [& args]
-  (println "gamma rate: " gamma)
-  (println "epsilon rate: " epsilon)
-  (println "power: " (* gamma epsilon)))
+  "Day 4: Giant Squid"
+  [& _]
+  (println "Found a Giant Squid!"))
