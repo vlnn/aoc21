@@ -3,11 +3,13 @@
             [clojure.core.matrix :as matrix])
   (:gen-class))
 
+(def input (str/split-lines (slurp "resources/input.txt")))
+
 (def bingo-input
-  (map #(Integer/parseInt %) (str/split  (first (str/split-lines (slurp "resources/input.txt"))) #",")))
+  (map #(Integer/parseInt %) (str/split  (first input) #",")))
 
 (def bingo-boards-raw
-  (map #(Integer/parseInt %) (filter not-empty (str/split (str/join #" "  (rest (str/split-lines (slurp "resources/input.txt")))) #" "))))
+  (map #(Integer/parseInt %) (filter not-empty (str/split (str/join #" " (rest input)) #" "))))
 
 (def bingo-boards
   (matrix/reshape bingo-boards-raw [100 5 5]))
